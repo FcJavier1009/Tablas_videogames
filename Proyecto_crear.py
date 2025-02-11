@@ -23,9 +23,15 @@ cursor.execute('''
 
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS Prestamos (
-        id_prestamo INTERGER PRIMARY KEY AUTOINCREMENT,
-        id_usuario TEXT NOT NULL,
-        email TEXT UNIQUE NOT NULL,
-        telefono TEXT
+        id_prestamo INTEGER PRIMARY KEY AUTOINCREMENT,
+        id_usuario INTEGER NOT NULL,
+        id_videojuego INTEGER NOT NULL,
+        fecha_prestamo TEXT NOT NULL,
+        fecha_devolucion TEXT NOT NULL,
+        FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario),
+        FOREIGN KEY (id_videojuego) REFERENCES Videojuegos(id_videojuego)
     )
 ''')
+
+conexion.commit()
+conexion.close()

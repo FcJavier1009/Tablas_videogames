@@ -20,8 +20,8 @@ def crear_tablas():
         id_prestamo INTEGER PRIMARY KEY AUTOINCREMENT,
         id_usuario INTEGER NOT NULL,
         id_videojuego INTEGER NOT NULL,
-        fecha_prestamo TEXT NOT NULL,
-        fecha_devolucion TEXT NOT NULL,
+        fecha_prestamo DATE NOT NULL,
+        fecha_devolucion DATE NOT NULL,
         FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario),
         FOREIGN KEY (id_videojuego) REFERENCES Videojuegos(id_videojuego))''')
     conexion.commit()
@@ -43,6 +43,21 @@ def mostrar_usuarios():
         print(fila)
     conexion.close()
     
+def mostrar_videojuegos():
+    conexion = conectar()
+    cursor = conexion.cursor()
+    cursor.execute("SELECT * FROM Videojuegos")
+    for fila in cursor.fetchall():
+        print(fila)
+    conexion.close()
+
+def mostrar_prestamos():
+    conexion = conectar()
+    cursor = conexion.cursor()
+    cursor.execute("SELECT * FROM Prestamos")
+    for fila in cursor.fetchall():
+        print(fila)
+    conexion.close()
 def eliminar_usuario(id_usuario):
     conexion = conectar()
     cursor = conexion.cursor()
@@ -54,7 +69,7 @@ def eliminar_usuario(id_usuario):
 def menu():
     crear_tablas()
     while True:
-        print("\n1. Insertar usuario\n2. Insertar videojuego\n3. Insertar préstamo\n4. Mostrar usuarios\n5. Eliminar usuario\n6. Eliminar préstamo\n7. Salir")
+        print("\n1. Insertar usuario\n2. Insertar videojuego\n3. Insertar préstamo\n4. Mostrar usuarios\n5. Mostrar videojuegos\n6. Mostrar préstamos\n7. Eliminar usuario\n8. Eliminar préstamo\n9. Salir")
         opcion = input("Elige una opción: ")
         if opcion == "1":
             insertar_usuario(input("Nombre: "), input("Email: "), input("Teléfono: "))
@@ -65,10 +80,14 @@ def menu():
         elif opcion == "4":
             mostrar_usuarios()
         elif opcion == "5":
-            eliminar_usuario(int(input("ID Usuario a eliminar: ")))
+            mostrar_videojuegos()
         elif opcion == "6":
-            eliminar_prestamo(int(input("ID Préstamo a eliminar: ")))
+            mostrar_prestamos()
         elif opcion == "7":
+            eliminar_usuario(int(input("ID Usuario a eliminar: ")))
+        elif opcion == "8":
+            eliminar_prestamo(int(input("ID Préstamo a eliminar: ")))
+        elif opcion == "9":
             break
         else:
             print("Opción no válida")

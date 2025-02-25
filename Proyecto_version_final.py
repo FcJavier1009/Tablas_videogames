@@ -33,6 +33,7 @@ def crear_tablas():
 
 def insertar_usuario(nombre, email, telefono):
     conexion = conectar()
+    conexion.execute('PRAGMA foreign_keys=ON')
     cursor = conexion.cursor()
     cursor.execute('''INSERT INTO Usuarios (nombre, email, telefono) VALUES (?, ?, ?)''', (nombre, email, telefono))
     print("Usuario agregado correctamente")
@@ -41,6 +42,7 @@ def insertar_usuario(nombre, email, telefono):
 
 def insertar_videojuego(titulo, plataforma, stock):
     conexion = conectar()
+    conexion.execute('PRAGMA foreign_keys=ON')
     cursor = conexion.cursor()
     cursor.execute('''INSERT INTO Videojuegos (titulo, plataforma, stock) VALUES (?, ?, ?)''', (titulo, plataforma, stock))
     print("Usuario agregado correctamente")
@@ -49,6 +51,7 @@ def insertar_videojuego(titulo, plataforma, stock):
 
 def insertar_prestamo(id_usuario, id_videojuego, fecha_prestamo, fecha_devolucion):
     conexion = conectar()
+    conexion.execute('PRAGMA foreign_keys=ON')
     cursor = conexion.cursor()
     cursor.execute('''INSERT INTO Prestamos (id_usuario, id_videojuego, fecha_prestamo, fecha_devolucion) VALUES (?, ?, ?, ?)''', (id_usuario, id_videojuego, fecha_prestamo, fecha_devolucion))
     print("Prestamo agregado correctamente")
@@ -57,6 +60,7 @@ def insertar_prestamo(id_usuario, id_videojuego, fecha_prestamo, fecha_devolucio
 
 def mostrar_usuarios():
     conexion = conectar()
+    conexion.execute('PRAGMA foreign_keys=ON')
     cursor = conexion.cursor()
     cursor.execute('''SELECT * FROM Usuarios''')
     for fila in cursor.fetchall():
@@ -65,6 +69,7 @@ def mostrar_usuarios():
     
 def mostrar_videojuegos():
     conexion = conectar()
+    conexion.execute('PRAGMA foreign_keys=ON')
     cursor = conexion.cursor()
     cursor.execute('''SELECT * FROM Videojuegos''')
     for fila in cursor.fetchall():
@@ -73,6 +78,7 @@ def mostrar_videojuegos():
 
 def mostrar_prestamos():
     conexion = conectar()
+    conexion.execute('PRAGMA foreign_keys=ON')
     cursor = conexion.cursor()
     cursor.execute('''SELECT * FROM Prestamos''')
     for fila in cursor.fetchall():
@@ -80,6 +86,7 @@ def mostrar_prestamos():
     conexion.close()
 def eliminar_usuario(id_usuario):
     conexion = conectar()
+    conexion.execute('PRAGMA foreign_keys=ON')
     cursor = conexion.cursor()
     cursor.execute('''DELETE FROM Usuarios WHERE id_usuario = ?''', (id_usuario,))
     print("Usuario eliminado correctamente")
@@ -88,6 +95,7 @@ def eliminar_usuario(id_usuario):
 
 def eliminar_videojuego(id_videojuego):
     conexion = conectar()
+    conexion.execute('PRAGMA foreign_keys=ON')
     cursor = conexion.cursor()
     cursor.execute('''DELETE FROM Videojuegos WHERE id_videojuego = ?''', (id_videojuego,))
     print("Videojuego eliminado correctamente")
@@ -96,6 +104,7 @@ def eliminar_videojuego(id_videojuego):
 
 def eliminar_prestamo(id_prestamo):
     conexion = conectar()
+    conexion.execute('PRAGMA foreign_keys=ON')
     cursor = conexion.cursor()
     cursor.execute('''DELETE FROM Prestamos WHERE id_prestamo = ?''', (id_prestamo,))
     print("Prestamo eliminado correctamente")
@@ -104,6 +113,7 @@ def eliminar_prestamo(id_prestamo):
 
 def modificar_usuarios(id_usuario, nombre, email, telefono):
     conexion = conectar()
+    conexion.execute('PRAGMA foreign_keys=ON')
     cursor = conexion.cursor()
     cursor.execute('''UPDATE Usuarios SET nombre = ? WHERE id_usuario = ? ''', (nombre, id_usuario))
     cursor.execute('''UPDATE Usuarios SET email = ? WHERE id_usuario = ? ''', (email, id_usuario))
@@ -114,6 +124,7 @@ def modificar_usuarios(id_usuario, nombre, email, telefono):
 
 def modificar_videojuegos(id_videojuego, titulo, plataforma, stock):
     conexion = conectar()
+    conexion.execute('PRAGMA foreign_keys=ON')
     cursor = conexion.cursor()
     cursor.execute('''UPDATE Videojuegos SET titulo = ? WHERE id_videojuego = ? ''', (titulo, id_videojuego))
     cursor.execute('''UPDATE Videojuegos SET plataforma = ? WHERE id_videojuego = ? ''', (plataforma, id_videojuego))
@@ -124,6 +135,7 @@ def modificar_videojuegos(id_videojuego, titulo, plataforma, stock):
 
 def modificar_prestamos(id_prestamo, fecha_prestamo, fecha_devolucion):
     conexion = conectar()
+    conexion.execute('PRAGMA foreign_keys=ON')
     cursor = conexion.cursor()
     cursor.execute('''UPDATE Prestamos SET fecha_prestamo = ? WHERE id_prestamo = ? ''', (fecha_prestamo, id_prestamo))
     cursor.execute('''UPDATE Prestamos SET fecha_devolucion = ? WHERE id_prestamo = ? ''', (fecha_devolucion, id_prestamo))

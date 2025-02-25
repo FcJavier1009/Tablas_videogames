@@ -5,6 +5,7 @@ def conectar():
 
 def crear_tablas():
     conexion = conectar()
+    conexion.execute('PRAGMA foreign_keys=ON')
     cursor = conexion.cursor()
     cursor.execute('''CREATE TABLE IF NOT EXISTS Usuarios (
         id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
